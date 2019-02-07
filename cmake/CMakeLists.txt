@@ -47,6 +47,7 @@ option(protobuf_WITH_ZLIB "Build with zlib support" ${protobuf_WITH_ZLIB_DEFAULT
 set(protobuf_DEBUG_POSTFIX "d"
   CACHE STRING "Default debug postfix")
 mark_as_advanced(protobuf_DEBUG_POSTFIX)
+option(protobuf_NO_RTTI "Define GOOGLE_PROTOBUF_NO_RTTI" OFF)
 # User options
 include(protobuf-options.cmake)
 
@@ -207,6 +208,10 @@ endif (MSVC)
 if (protobuf_UNICODE)
   add_definitions(-DUNICODE -D_UNICODE)
 endif (protobuf_UNICODE)
+
+if (protobuf_NO_RTTI)
+  add_definitions(-DGOOGLE_PROTOBUF_NO_RTTI)
+endif (protobuf_NO_RTTI)
 
 include(libprotobuf-lite.cmake)
 include(libprotobuf.cmake)
